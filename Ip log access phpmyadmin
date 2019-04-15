@@ -1,0 +1,16 @@
+=> Find phpmyadmin folder in wamp or lamp 
+in lamp linux
+
+opt/lampp/phpmyadmin-> index.php
+
+And put below code
+
+date_default_timezone_set('Asia/Calcutta'); 
+$ip = getenv('REMOTE_ADDR');
+$time = date("Y-m-d H:i:s");
+$txt = $ip."=>".$time."%%%%%%%%";
+$myfile = file_put_contents('phpmyadminaccesslog.txt', $txt.PHP_EOL , FILE_APPEND | 
+LOCK_EX);
+
+and create txt file in same folder as any name like phpmyadminaccesslog.txt then save and close.
+
