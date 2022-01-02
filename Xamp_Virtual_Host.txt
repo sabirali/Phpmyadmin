@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-28T18:00:01+05:30
+
+====== Xamp Virtual Host ======
+Created Friday 28 December 2018
+
+Reference Link :
+
+https://ourcodeworld.com/articles/read/302/how-to-setup-a-virtual-host-locally-with-xampp-in-ubuntu

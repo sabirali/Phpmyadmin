@@ -1,0 +1,52 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-05-08T18:25:19+05:30
+
+====== Multiple PHP Ubuntu ======
+Created Wednesday 08 May 2019
+
+**Install Multiple PHP version in Ubuntu :**
+
+1) https://www.tecmint.com/install-different-php-versions-in-ubuntu/
+
+=> To install the default PHP version from the Ubuntu software repositories, use the command below.
+	- sudo apt install php
+=> Next, update the system as follows.
+	-  sudo apt-get update
+=> Now install different supported versions of PHP as follows.
+	For Apache Web Server:
+	- sudo apt install php5.6
+	- sudo apt install php7.0
+	- sudo apt install php7.1
+	- sudo apt install php7.2
+	- sudo apt install php7.3
+	For Nginx Web Server:
+	- sudo apt install php5.6-fpm
+	- sudo apt install php7.0-fpm
+	- sudo apt install php7.1-fpm
+	- sudo apt install php7.2-fpm
+	- sudo apt install php7.3-fpm
+=>To install any PHP modules, simply specify the PHP version and use the auto-completion functionality to view all modules as follows.
+	- sudo apt install php5.6
+	- sudo apt install php7.0
+	- sudo apt install php7.1
+	- sudo apt install php7.2
+	- sudo apt install php7.3 
+=> Now you can install most required PHP modules from the list.
+	- sudo apt install php5.6-cli php5.6-xml php5.6-mysql
+	- sudo apt install php7.0-cli php7.0-xml php7.0-mysql
+	- sudo apt install php7.1-cli php7.1-xml php7.1-mysql
+	- sudo apt install php7.2-cli php7.2-xml php7.2-mysql
+	- sudo apt install php7.3-cli php7.3-xml php7.3-mysql
+=> Finally, verify your default PHP version used on your system like this.
+	-php -v 
+=> Set Default PHP Version in Ubuntu
+	- sudo update-alternatives --set php /usr/bin/php5.6
+=> To set the PHP version that will work with Apache web server, use the commands below. First disable the current version with the a2dismod command and then enable the one you want with the a2enmod command.
+	- sudo a2dismod php7.0
+	- sudo a2enmod php7.1
+	- sudo systemctl restart apache2 OR sudo service apache2 restart
+=> install mysql
+	- sudo apt-get install mysql-server
+=> install phpmyadmin
+	- sudo apt-get install phpmyadmin
