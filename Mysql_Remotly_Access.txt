@@ -1,0 +1,94 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-07-03T14:39:47+05:30
+
+====== Mysql Remotly Access ======
+Created Tuesday 03 July 2018
+
+**Use Full Command list:**
+
+telnet 10.0.0.2 3306
+sudo netstat -ntlup | grep mysql  => listedn ip check
+show variables like '%bind%';
+show variables like '%skip_networking%';
+lsof -i -P | grep :3306 — Check TCP Ip 
+netstat -tln — Check Mysql listen port list
+sudo grep -R bind [[/etc/mysql]] — check my.cnf setting 
+sudo service mysql restart
+sudo /etc/init.d/mysql restart
+
+**Allow Phpmyadmin Remotly XAMPP:**
+Ubuntu Xamp : 
+File : [[/opt/lampp/etc/extra/httpd-xampp.conf]]
+Add code in last:
+# since XAMPP 1.4.3
+<Directory "/opt/lampp/phpmyadmin">
+	AllowOverride AuthConfig Limit
+	Order allow,deny
+	Require all granted
+	Allow from 192.168.2.56
+   //Allow from all
+</Directory>
+-------------------------------------- 
+**Remotly Access Mysql in Lamp Staging :**
+Usefull link : http://www.configserverfirewall.com/ubuntu-linux/enable-mysql-remote-access-ubuntu/ 
+
+Ubuntu lamp:
+cd [[/etc/mysq/my.cnf]]
+
+**Changes:** 
+**1)** put bind-address in [mysqld]
+	And change from 127.0.0.1 To 0.0.0.0
+**2)** comment 
+-> # skip-external-locking
+**3)** Restart **mysql service**
+sudo service mysql stop
+sudo service mysql start
+	OR
+sudo [[/etc/init.d/mysql]] stop
+sudo [[/etc/init.d/mysql]] start
+
+4) Add Inbound rule for EC2 instance
+-> HTTP  80port
+-> All TCP  anywhere
+-> SSH  22port 
+
+
+**Create user from command :**
+
+mysql -u root -p
+Enter passwords
+GRANT ALL ON foo123.* TO 'sabir1'@'%' IDENTIFIED BY 'jos@123' WITH GRANT OPTION;
+GRANT ALL ON foo123.* TO 'sabir'@'localhost' IDENTIFIED BY 'jos@123' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+
+Check connection working or not:
+sudo telnet 52.66.46.3 3306  
+	OR
+sudo lsof -i -P | grep :3306
+mysqld   30583    mysql   10u  IPv4 7422528      0t0  TCP *:3306 (LISTEN)
+
+--------------------------------------	
+Then run below command :
+GRANT ALL ON jos_live_new.* TO 'jos'@'%' IDENTIFIED BY 'jos@123' WITH GRANT OPTION;
+GRANT ALL ON foo123.* TO 'sabir'@'%' IDENTIFIED BY 'jos@123' WITH GRANT OPTION;
+
+GRANT ALL ON foo123.* TO 'sabir1'@'%' IDENTIFIED BY 'jos@123' WITH GRANT OPTION;
+GRANT ALL ON foo123.* TO 'sabir'@'localhost' IDENTIFIED BY 'jos@123' WITH GRANT OPTION;
+
+GRANT ALL ON foo123.* TO 'sabir2'@'52.66.46.3' IDENTIFIED BY 'jos@123' WITH GRANT OPTION;
+
+CREATE USER 'jos'@'localhost' IDENTIFIED BY 'jos@1234';
+CREATE USER 'jos1'@'%' IDENTIFIED BY 'jos@1234';
+
+GRANT ALL ON *.* TO 'jos'@'localhost';
+GRANT ALL ON *.* TO 'jos1'@'%';
+
+FLUSH PRIVILEGES;
+
+CREATE USER 'myuser'@'localhost' IDENTIFIED BY 'jos@1234';
+CREATE USER 'myuser'@'localhost' IDENTIFIED BY 'jos@1234';
+GRANT ALL PRIVILEGES ON foo123.* TO 'myuser'@'localhost';
+GRANT ALL PRIVILEGES ON foo123.* TO 'myuser'@'52.66.46.3';    
+
+

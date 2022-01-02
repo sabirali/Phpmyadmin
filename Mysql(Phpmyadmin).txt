@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-05-14T10:24:31+05:30
+
+====== Mysql(Phpmyadmin) ======
+Created Tuesday 14 May 2019
+
+=>  Error throw only group something:
+	- SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));
+	
+	
+
+
